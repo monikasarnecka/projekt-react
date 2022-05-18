@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { render, screen } from '@testing-library/react';
+import App from './App.css';
+import { Routes, Route, Link } from "react-router-dom";
+import {Hot} from "./Pages/Hot";
+import {ListMem} from "./Pages/Regular";
+import {useSelector, useDispatch} from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+export default function App2() {
+const dispatch = useDispatch();
+const regularphoto = useSelector(state => state.regularphoto);
+const hotphoto = useSelector(state => state.hotphoto);
+
+const setRegularPhoto=(regularphoto)=>{
+  dispatch({type: "SET_REGULARPHOTO" , payload:(regularphoto)})
+}
+
+const setHotPhoto = (hotphoto) => {
+  dispatch({type: "SET_HOTPHOTO", payload: hotphoto})
+}
+
+
+  return(
+    <div className="App2">
+      <div>
+        <link to="/hot">Hot</link>
+        <link to="/regular">Regular</link>
+      </div>
+      <Routes>
+        <Route path="/hot" element={<Hot/>}/>
+        <Route path="/regular" element={<ListMem/>}/>
+      </Routes>
     </div>
   );
 }
-
-export default App;
