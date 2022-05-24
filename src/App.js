@@ -1,13 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from "@testing-library/react";
 //import App from './App.css';
 import { Routes, Route, Link } from "react-router-dom";
-import {Hot} from "./Pages/Hot";
-import {ListMem} from "./Pages/Regular";
+import { Hot } from "./Pages/Hot";
+import { ListMem } from "./Pages/Regular";
 //import {useSelector, useDispatch} from "react-redux";
-import {useEffect, useState} from 'react';
-import {Mem} from "./Pages/Regular";
-
-
+import { useEffect, useState } from "react";
+import { Mem } from "./Pages/Regular";
 
 // export default function App2() {
 // const dispatch = useDispatch();
@@ -21,7 +19,6 @@ import {Mem} from "./Pages/Regular";
 // const setHotPhoto = (hotphoto) => {
 //   dispatch({type: "SET_HOTPHOTO", payload: hotphoto})
 // }
-
 
 //   return(
 //     // <div className="App2">
@@ -40,23 +37,31 @@ import {Mem} from "./Pages/Regular";
 //   );
 // }
 
-
-
-export default function App () {
+export default function App() {
   const [dogImages, setDogImages] = useState(Mem);
-  
 
-  useEffect(()=>{
-     
-  }, [])
+  useEffect(() => {}, []);
 
   return (
     <div>
-      Dogs
-      kkk
-      {
-        dogImages.map(image => <img key={image.img} src={image.img}/>)
-      }
+      Dogs kkk
+      {dogImages.map((image) => (
+        <MemComponent image={image} />
+      ))}
     </div>
   );
-};
+}
+
+function MemComponent(props) {
+  return (
+    <div class="MemContainer">
+      <div class="MemTitle">{props.image.title}</div>
+      <img key={props.image.img} src={props.image.img} />
+      <div>
+        <div>Upvotes: {props.image.upvotes}</div>
+        <div>Downvotes: {props.image.downvotes}</div>
+      </div>
+
+    </div>
+  );
+}

@@ -14,8 +14,8 @@ export const Mem =  [
     },
     {
         title:"Mem 2",
-        upvotes:6,
-        downvotes:0,
+        upvotes:4,
+        downvotes:5,
         img:"https://i.wpimg.pl/985x0/m.fotoblogia.pl/comedy-wildlife-7-afb32d574cef7b.jpg",
     },
     {
