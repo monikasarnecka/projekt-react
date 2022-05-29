@@ -70,22 +70,3 @@ export const Mem =  [
 
 
 
-// export const ListMem = () => {
-//     const [regularphoto, setRegularPhoto] = useState([Mem]);
-//     const dispatch = useDispatch();
-//     const regularphotos = useSelector(state=>state.regularphotos)
-
-
-// useEffect(()=> {
-//     dispatch({
-//         type:"SET_REGULARPHOTO",
-//         payload: regularphoto,
-//     })
-// }, [])
-//     return(
-//         <div>
-           
-//            {regularphoto}
-//         </div>
-//     );
-// };
