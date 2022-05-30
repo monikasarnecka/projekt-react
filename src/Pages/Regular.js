@@ -9,6 +9,7 @@ export const Regular = (props) => {
         mems={props.mems}
         onUpvoteClick={props.onUpvoteClick}
         onDownvoteClick={props.onDownvoteClick}
+        onFavouriteClick={props.onFavouriteClick}
       />
     </div>
   );

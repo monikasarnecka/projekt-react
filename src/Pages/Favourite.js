@@ -1,9 +1,9 @@
 import { MemList } from "../components/MemList";
 
-export const Hot = (props) => {
+export const Favourite = (props) => {
   return (
     <div>
-      <div>HOT</div>
+      <div>FAVOURITE</div>
       <MemList 
       mems={props.mems} 
       onUpvoteClick={props.onUpvoteClick} 

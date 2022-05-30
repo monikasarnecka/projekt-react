@@ -11,6 +11,7 @@ export const MemList = (props) => {
           mem={mem}
           onUpvoteClick={() => props.onUpvoteClick(mem)}
           onDownvoteClick={() => props.onDownvoteClick(mem)}
+          onFavouriteClick={() => props.onFavouriteClick(mem)} 
         />
       ))}
     </div>
