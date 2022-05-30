@@ -7,7 +7,11 @@ export const MemList = (props) => {
   return (
     <div>
       {props.mems.map((mem) => (
-        <Mem mem={mem} />
+        <Mem
+          mem={mem}
+          onUpvoteClick={() => props.onUpvoteClick(mem)}
+          onDownvoteClick={() => props.onDownvoteClick(mem)}
+        />
       ))}
     </div>
   );

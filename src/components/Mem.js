@@ -10,11 +10,11 @@ export const Mem = (props) => {
       <div>
         <div>
           Upvotes: {props.mem.upvotes}{" "}
-          <FontAwesomeIcon icon={faArrowUp}  />
+          <FontAwesomeIcon icon={faArrowUp} onClick={props.onUpvoteClick} />
         </div>
         <div>
           Downvotes: {props.mem.downvotes}{" "}
-          <FontAwesomeIcon icon={faArrowDown}  />
+          <FontAwesomeIcon icon={faArrowDown} onClick={props.onDownvoteClick} />
         </div>
       </div>
     </div>

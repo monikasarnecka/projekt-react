@@ -4,8 +4,16 @@ import React, { useEffect, useState } from "react";
 import { Regular } from "./Pages/Regular";
 import { MemStore } from "./store/memStore";
 
-
 export default function App() {
+
+  const handleClickUpvote = (mem) => {
+    console.log("kliknięto Upvotes:" + mem.title);
+  }
+
+  const handleClickDownvote = (mem) => {
+    console.log("kliknięto Dawnvotes" + mem.title);
+  }
+
   return (
     <div className="App">
       <div>
@@ -13,8 +21,26 @@ export default function App() {
         <Link to="/hot">Hot</Link>
       </div>
       <Routes>
-        <Route path="/" element={<Regular mems={MemStore} />} />
-        <Route path="/hot" element={<Hot mems={MemStore} />} />
+        <Route
+          path="/"
+          element={
+            <Regular
+              mems={MemStore}
+              onUpvoteClick={handleClickUpvote}
+              onDownvoteClick={handleClickDownvote}
+            />
+          }
+        />
+        <Route
+          path="/hot"
+          element={
+            <Hot
+              mems={MemStore}
+              onUpvoteClick={handleClickUpvote}
+              onDownvoteClick={handleClickDownvote}
+            />
+          }
+        />
       </Routes>
     </div>
   );
