@@ -1,18 +1,33 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { Hot } from "./Pages/Hot";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Regular } from "./Pages/Regular";
 import { MemStore } from "./store/memStore";
 
 export default function App() {
+  const [memsRegular, setMemsRegular] = React.useState(MemStore.filter(isRegularMem));
+  const [memsHot, setMemsHot] = React.useState(MemStore.filter(isHotMem));
 
-  const handleClickUpvote = (mem) => {
-    console.log("kliknięto Upvotes:" + mem.title);
-  }
+  const handleClick = (clickedMem, updateMem) => {
+    let newMems = memsRegular.concat(memsHot);
+    const memIndex = newMems.findIndex((m) => m.title == clickedMem.title);
+    updateMem(newMems[memIndex]);
 
-  const handleClickDownvote = (mem) => {
-    console.log("kliknięto Dawnvotes" + mem.title);
-  }
+    setMemsRegular(newMems.filter(isRegularMem));
+    setMemsHot(newMems.filter(isHotMem));
+  };
+  
+  const handleClickUpvote = (clickedMem) => {
+    handleClick(clickedMem, (mem) => {
+      mem.upvotes = mem.upvotes + 1;
+    });
+  };
+
+  const handleClickDownvote = (clickedMem) => {
+    handleClick(clickedMem, (mem) => {
+      mem.downvotes = mem.downvotes + 1;
+    });
+  };
 
   return (
     <div className="App">
@@ -25,7 +40,7 @@ export default function App() {
           path="/"
           element={
             <Regular
-              mems={MemStore}
+              mems={memsRegular}
               onUpvoteClick={handleClickUpvote}
               onDownvoteClick={handleClickDownvote}
             />
@@ -35,7 +50,7 @@ export default function App() {
           path="/hot"
           element={
             <Hot
-              mems={MemStore}
+              mems={memsHot}
               onUpvoteClick={handleClickUpvote}
               onDownvoteClick={handleClickDownvote}
             />
@@ -44,4 +59,12 @@ export default function App() {
       </Routes>
     </div>
   );
+}
+
+function isRegularMem(mem) {
+  return mem.upvotes - mem.downvotes <= 5;
+}
+
+function isHotMem(mem) {
+  return mem.upvotes - mem.downvotes > 5;
 }
