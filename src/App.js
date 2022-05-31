@@ -1,17 +1,19 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, BrowserRouter, useLocation, matchPath } from "react-router-dom";
 import { Hot } from "./Pages/Hot";
 import React from "react";
 import { Regular } from "./Pages/Regular";
 import { MemStore } from "./store/memStore";
 import { Favourite } from "./Pages/Favourite";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import { AppBar } from "@mui/material";
 
 export default function App() {
   const [memsRegular, setMemsRegular] = React.useState(
     MemStore.filter(isRegularMem)
   );
-  const [memsHot, setMemsHot] = React.useState(
-    MemStore.filter(isHotMem)
-    );
+  const [memsHot, setMemsHot] = React.useState(MemStore.filter(isHotMem));
   const [memsFavourite, setMemsFavourite] = React.useState(
     MemStore.filter(isFavouriteMem)
   );
@@ -44,12 +46,33 @@ export default function App() {
     });
   };
 
+  function useRouteMatch(patterns) {
+    const { pathname } = useLocation();
+  
+    for (let i = 0; i < patterns.length; i += 1) {
+      const pattern = patterns[i];
+      const possibleMatch = matchPath(pattern, pathname);
+      if (possibleMatch !== null) {
+        return possibleMatch;
+      }
+    }
+  
+    return null;
+  }
+
+  const routeMatch = useRouteMatch(['/', '/hot', '/favourite']);
+  const currentTab = routeMatch?.pattern?.path;
+
   return (
     <div className="App">
-      <div>
-        <Link to="/">Regular</Link>
-        <Link to="/hot">Hot</Link>
-        <Link to="/favourite">Favourite</Link>
+      <div class="navigation">
+        <Box sx={{ width: "100%", bgcolor: "#a5b6c4" }}>
+          <Tabs value={currentTab} centered>
+            <Tab label="Regular" value="/" to="/" component={Link}/>
+            <Tab label="Hot" value="/hot" to="/hot" component={Link}/>
+            <Tab label="Favourite" value="/favourite" to="/favourite" component={Link}/>
+          </Tabs>
+        </Box>
       </div>
       <Routes>
         <Route
@@ -75,7 +98,7 @@ export default function App() {
           }
         />
         <Route
-          path="favourite"
+          path="/favourite"
           element={
             <Favourite
               mems={memsFavourite}
