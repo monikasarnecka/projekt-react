@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import { MemList } from "../components/MemList";
 
 export const Hot = (props) => {
+  useEffect(() => {
+    document.title = "Memy - Hot";
+  });
+
   return (
     <div>
       <div>HOT</div>
