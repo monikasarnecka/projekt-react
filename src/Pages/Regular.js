@@ -8,7 +8,6 @@ export const Regular = (props) => {
 
   return (
     <div>
-      <div>REGULAR</div>
       <MemList
         mems={props.mems}
         onUpvoteClick={props.onUpvoteClick}

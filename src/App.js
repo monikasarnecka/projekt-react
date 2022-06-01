@@ -1,4 +1,11 @@
-import { Routes, Route, Link, BrowserRouter, useLocation, matchPath } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Link,
+  BrowserRouter,
+  useLocation,
+  matchPath,
+} from "react-router-dom";
 import { Hot } from "./Pages/Hot";
 import React from "react";
 import { Regular } from "./Pages/Regular";
@@ -7,7 +14,6 @@ import { Favourite } from "./Pages/Favourite";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { AppBar } from "@mui/material";
 
 export default function App() {
   const [memsRegular, setMemsRegular] = React.useState(
@@ -48,7 +54,7 @@ export default function App() {
 
   function useRouteMatch(patterns) {
     const { pathname } = useLocation();
-  
+
     for (let i = 0; i < patterns.length; i += 1) {
       const pattern = patterns[i];
       const possibleMatch = matchPath(pattern, pathname);
@@ -56,11 +62,11 @@ export default function App() {
         return possibleMatch;
       }
     }
-  
+
     return null;
   }
 
-  const routeMatch = useRouteMatch(['/', '/hot', '/favourite']);
+  const routeMatch = useRouteMatch(["/", "/hot", "/favourite"]);
   const currentTab = routeMatch?.pattern?.path;
 
   return (
@@ -68,9 +74,14 @@ export default function App() {
       <div class="navigation">
         <Box sx={{ width: "100%", bgcolor: "#a5b6c4" }}>
           <Tabs value={currentTab} centered>
-            <Tab label="Regular" value="/" to="/" component={Link}/>
-            <Tab label="Hot" value="/hot" to="/hot" component={Link}/>
-            <Tab label="Favourite" value="/favourite" to="/favourite" component={Link}/>
+            <Tab label="Regular" value="/" to="/" component={Link} />
+            <Tab label="Hot" value="/hot" to="/hot" component={Link} />
+            <Tab
+              label="Favourite"
+              value="/favourite"
+              to="/favourite"
+              component={Link}
+            />
           </Tabs>
         </Box>
       </div>
